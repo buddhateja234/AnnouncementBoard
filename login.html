@@ -2,21 +2,35 @@
 <html>
 <head>
   <title>Login Page</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+
+
 <body>
-  <h2>Login</h2>
-  <form action="/login" method="post">
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required>
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <div>
-      <input type="submit" value="Log in">
-    </div>
-  </form>
+  <h1 style="display:flex; justify-content: center;margin-top: 5vh;">Welcome to NITK's SC community </h1>
+  <small style="display:flex; justify-content: center;">(Please Login with NITK mail)</small>
+  <div style="display:flex; justify-content:center; margin-top: 15vh;">
+    <form style="width: 25em; ">
+      <div class="form-group" >
+        <label for="EM">Email address</label>
+        <input type="email" class="form-control" id="EM">
+      </div>
+      <div class="form-group" >
+        <label for="UN">Username : </label>
+        <input type="email" class="form-control" id="UN">
+      </div>
+      <div class="form-group">
+        <label for="PS">Password</label>
+        <input type="password" class="form-control" id="PS">
+      </div>
+      <button style="background-color: aqua; border-radius: 5px; border-color: aquamarine; height: 5vh; width: 8em; margin-top: 2vh" ><a href="index.html" style="text-decoration: none;">Submit</a></button>
+    </form>
+
+  </div>
+    
+    
+    
 </body>
 </html>

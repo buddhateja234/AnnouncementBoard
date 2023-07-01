@@ -85,7 +85,7 @@ function addPost(){
     contain.appendChild(main)
     contain.appendChild(matter)
     console.log(contain)
-    document.getElementById('main_posts').innerHTML += contain.outerHTML
+    document.getElementById('main_posts').innerHTML = contain.outerHTML + document.getElementById('main_posts').innerHTML
 
 
 }

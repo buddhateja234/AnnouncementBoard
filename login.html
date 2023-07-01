@@ -4,7 +4,16 @@
   <title>Login Page</title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+  function checkHandler(event){
+    console.log('hhee?')
+    temp=event.target.value
+    if(!(temp.endsWith('@nitk.edu.in'))){
+      alert('please enter a valid Email')
+    }
+
+  }
+</script>
 </head>
 
 
@@ -15,17 +24,17 @@
     <form style="width: 25em; ">
       <div class="form-group" >
         <label for="EM">Email address</label>
-        <input type="email" class="form-control" id="EM">
+        <input onchange="checkHandler(event);" type="email" class="form-control" id="EM">
       </div>
       <div class="form-group" >
         <label for="UN">Username : </label>
-        <input type="email" class="form-control" id="UN">
+        <input class="form-control" id="UN">
       </div>
       <div class="form-group">
         <label for="PS">Password</label>
         <input type="password" class="form-control" id="PS">
       </div>
-      <button style="background-color: aqua; border-radius: 5px; border-color: aquamarine; height: 5vh; width: 8em; margin-top: 2vh" ><a href="index.html" style="text-decoration: none;">Submit</a></button>
+      <button style="background-color: aqua; border-radius: 5px; border-color: aquamarine; height: 5vh; width: 8em; margin-top: 2vh" ><a style="text-decoration: none;" href="index.html">Submit</a></button>
     </form>
 
   </div>

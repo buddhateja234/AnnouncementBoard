@@ -126,8 +126,39 @@ function handlePosts() {
 }
 
     </script>
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js"></script>
+<script type="module">
+  
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+  // const _supabase = createClient('https://xyzcompany.supabase.co', 'public-anon-key')
+
+
+  const supabaseUrl = 'https://flnstibhtmobvbineags.supabase.co'
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsbnN0aWJodG1vYnZiaW5lYWdzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MDYyOTY1MSwiZXhwIjoyMDA2MjA1NjUxfQ.xqn4sjQLhQt-Sv642qWwGa0TTYxNK1y0e-uXkBYyyKs"
+
+
+window.supabase = createClient( supabaseUrl, supabaseKey, {auth: { persistSession: false }});
+
+//console.log('Supabase Instance : ', supabase)
+
+async function tempasync() {
+  let { data, error } = await supabase
+    .from('User')
+    .select()
+    if(data){
+    console.log(data)}
+  return data
+  }
+//tempasync()
+
+    
+
+
+</script>
+
+
     
           
 </head>

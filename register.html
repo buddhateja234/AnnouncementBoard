@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register Page</title>
+  <script>
+    var supabase;
+  </script>
+  <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- <script type="module" src="login_connect.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js"></script>
+<script type="module">
+  
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+  // const _supabase = createClient('https://xyzcompany.supabase.co', 'public-anon-key')
+
+
+  const supabaseUrl = 'https://flnstibhtmobvbineags.supabase.co'
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsbnN0aWJodG1vYnZiaW5lYWdzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY5MDYyOTY1MSwiZXhwIjoyMDA2MjA1NjUxfQ.xqn4sjQLhQt-Sv642qWwGa0TTYxNK1y0e-uXkBYyyKs"
+
+
+window.supabase = createClient( supabaseUrl, supabaseKey, {auth: { persistSession: false }});
+
+console.log('Supabase Instance : ', supabase)
+
+async function tempasync() {
+  let { data, error } = await supabase
+    .from('User')
+    .select()
+    if(data){
+    console.log(data)}
+  return data
+  }
+//tempasync()
+
+</script>
+<script>
+  
+  function checkHandler(event){
+    console.log('hhee?')
+    temp=event.target.value
+    if(!(temp.endsWith('@nitk.edu.in'))){
+      alert('please enter a valid NITK Email')
+    }
+  }
+
+  const insertUser = async () =>{
+    const { data, error } = await supabase
+  .from('User')
+  .insert([
+    { 'e-mail': 'adarsh@nitk.edu.in', 'username': 'adarsh786','password': 'hello123'},
+  ])
+  .select()
+  console.log(data)
+}
+
+  async function tempo(event){
+    event.preventDefault()
+    console.log('lets see');
+    const formData = new FormData(event.target)
+    details = [...formData.entries()]
+    console.log(details)
+    console.log(typeof(details))
+    email = details[0][1]
+    username = details[1][1]
+    password = details[2][1]
+    phone = details[3][1]
+     
+    console.log(details[0])
+    
+      
+      const { data, error } = await supabase
+    .from('User')
+    .insert([
+      { 'e-mail':email,'username':username,'password':password,'phone':phone },
+    ])
+    .select()
+    console.log(data)
+  }
+    // tempasync()
+    // .then(result => {console.log(result)})
+    
+
+  //}
+
+  // const { data, error } = await supabase
+  // .from('User')
+  // .insert([
+  //   { details[0][0] : details[0][1], details[1][0]: details[1][1],details[2][0]: details[2][1],details[3][0]: details[3][1]},
+  // ])
+  // .select()
+  // console.log(data)
+
+  
+
+</script>
+
+
+</head>
+
+
+<body>
+  <h1 style="display:flex; justify-content: center;margin-top: 5vh;">Welcome to NITK's SC community </h1>
+  <small style="display:flex; justify-content: center;">(Please Register with NITK mail)</small>
+  <div style="display:flex; justify-content:center; margin-top: 15vh;">
+    <form id="myForm" style="text-align: center;" onsubmit="tempo(event)" >
+      <label for="e-mail">E-mail : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input size="30" maxlength="320" id="e-mail" style="border: 1px solid #000; border-radius: 2px; margin: 5px;" type="text" name="e-mail" placeholder="Email-id" onchange="checkHandler(event)" required ><br /><br />
+        <label for="username">Username : &nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input size="30" maxlength="30" type="text" style="border: 1px solid #000; border-radius: 2px; margin: 5px;" name="username" id ="username" placeholder="Username" required><br /><br />
+        <label for="password">Password : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input size="30" maxlength="30" type="text" style="border: 1px solid #000; border-radius: 2px; margin: 5px;" name="password" id="password" placeholder="Password" required><br /><br />
+        <label for="phone">Mobile No. : &nbsp;&nbsp;</label>
+        <input size="30" maxlength="13" type="text" style="border: 1px solid #000; border-radius: 2px; margin: 5px;" name="phone" id="phone" placeholder="Mobile No." required><br /><br /><br/>
+      <input onsubmit="tempo(event)" type="submit" value="Submit" style="margin: 0 auto; cursor: pointer; border: 2px; border-radius: 5px; background-color: aqua; padding-left: 10px; padding-right: 10px; padding-top: 2px; padding-bottom: 2px;">
+    </form>
+
+  </div>
+    
+</body>
+</html>

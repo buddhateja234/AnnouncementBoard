@@ -46,12 +46,19 @@ console.log('Supabase Instance : ', supabase)
       if(data[i]['username']==username){
         if(data[i]['password']==password){
           user = true
-          window.curr_user = username
+          localStorage.setItem('announce_name',username)
+          // window.curr_user = username
+          console.log(username)
         }
       }
-
     }
+
+    
+
     if(user==true){
+      console.log(username)
+      localStorage.setItem('announce_name',username)
+      console.log('username : ',localStorage.getItem('announce_name'))
       window.location.href = "index.html";
     }
   return user

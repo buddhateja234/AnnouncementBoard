@@ -77,6 +77,14 @@ async function tempasync() {
     ])
     .select()
     console.log(data)
+
+    const { data1, error1 } = await supabase
+    .from('Posts')
+    .insert([
+      { 'e-mail':email,'username':username,'Posts':[{}] },
+    ])
+    .select()
+    console.log(data)
   }
     // tempasync()
     // .then(result => {console.log(result)})

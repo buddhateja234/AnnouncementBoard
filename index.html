@@ -7,125 +7,6 @@
     <link rel="icon" type="image/png" href="announcement.png">
     <title>SC Announcement Board</title>
     <script src="func.js"></script>
-    <script>
-
-        
-function handlePosts() {
-    var main = document.createElement("h1");
-    main.style.fontWeight='900';
-    main.innerText="Fee Payment Details"
-    var matter = document.createElement("p")
-    matter.innerText = "Please Pay the fee if not paid else ignore"
-    var contain = document.createElement("div")
-    contain.style.margin='25px'
-    contain.style.padding = '15px'
-    contain.style.marginTop = '10px'
-    contain.style.cursor='pointer'
-    contain.style.width = '60em'
-    contain.style.height = '15vh'
-    contain.style.boxShadow = "3px 3px 3px 2px rgba(0,0,0,.8)"
-    //contain.setAttribute("onclick","alert_func();");
-    contain.appendChild(main)
-    contain.appendChild(matter)
-    console.log(contain)
-    document.getElementById('main_posts').innerHTML = contain.outerHTML
-
-    //2
-
-    var main = document.createElement("h1");
-    main.style.fontWeight='900';
-    main.innerText="Calendar"
-    var matter = document.createElement("p")
-    matter.innerText = "Details about the Events happening in the semester"
-    var contain = document.createElement("div")
-    contain.style.margin='25px'
-    contain.style.padding = '15px'
-    contain.style.marginTop = '10px'
-    contain.style.cursor='pointer'
-    contain.style.width = '60em'
-    contain.style.height = '15vh'
-    contain.style.boxShadow = "3px 3px 3px 2px rgba(0,0,0,.8)"
-    //contain.setAttribute("onclick","alert_func();");
-    contain.appendChild(main)
-    contain.appendChild(matter)
-    console.log(contain)
-    document.getElementById('main_posts').innerHTML += contain.outerHTML
-
-    //3
-
-    var main = document.createElement("h1");
-    main.style.fontWeight='900';
-    main.innerText="Curriculum"
-    var matter = document.createElement("p")
-    matter.innerText = "Just read so much"
-    var contain = document.createElement("div")
-    contain.style.margin='25px'
-    contain.style.padding = '15px'
-    contain.style.marginTop = '10px'
-    contain.style.cursor='pointer'
-    contain.style.width = '60em'
-    contain.style.height = '15vh'
-    contain.style.boxShadow = "3px 3px 3px 2px rgba(0,0,0,.8)"
-    //contain.setAttribute("onclick","alert_func();");
-    contain.appendChild(main)
-    contain.appendChild(matter)
-    console.log(contain)
-    document.getElementById('main_posts').innerHTML += contain.outerHTML
-
-    //4
-
-    var main = document.createElement("h1");
-    main.style.fontWeight='900';
-    main.innerText="Mess"
-    var matter = document.createElement("p")
-    matter.innerText = "Mess timings are updated"
-    var contain = document.createElement("div")
-    contain.style.margin='25px'
-    contain.style.padding = '15px'
-    contain.style.marginTop = '10px'
-    contain.style.cursor='pointer'
-    contain.style.width = '60em'
-    contain.style.height = '15vh'
-    contain.style.boxShadow = "3px 3px 3px 2px rgba(0,0,0,.8)"
-    //contain.setAttribute("onclick","alert_func();");
-    contain.appendChild(main)
-    contain.appendChild(matter)
-    console.log(contain)
-    document.getElementById('main_posts').innerHTML += contain.outerHTML
-
-
-    // function dummy(title,desc){
-    //     console.log('posts buddha')
-    //     var main = document.createElement("h1");
-    //     main.style.fontWeight='900';
-    //     console.log(title)
-    //     main.innerText=title
-    //     var matter = document.createElement("p")
-    //     matter.innerText = desc
-    //     var contain = document.createElement("div")
-    //     contain.style.margin='25px'
-    //     contain.style.padding = '15px'
-    //     contain.style.marginTop = '10px'
-    //     contain.style.cursor='pointer'
-    //     contain.style.width = '60em'
-    //     contain.style.height = '15vh'
-    //     contain.style.boxShadow = "3px 3px 3px 2px rgba(0,0,0,.8)"
-    //     //contain.setAttribute("onclick","alert_func();");
-    //     document.getElementById('main_posts').innerHTML += contain.outerHTML
-
-    // }
-    
-    // // contain.appendChild(main)
-    // // contain.appendChild(matter)
-    // //console.log(contain)
-    // // document.getElementById('main_posts').innerHTML = dummy("Fee Payment Details","Please Pay the fee if not paid else ignore").outerHTML
-    // dummy("Calendar","Details about the Events happening in the semester")
-    // dummy("Curriculum","Just read so much")
-    // dummy("Mess","Mess timings are updated")
-    
-}
-
-    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="https://unpkg.com/@supabase/supabase-js"></script>
@@ -140,6 +21,7 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 
 window.supabase = createClient( supabaseUrl, supabaseKey, {auth: { persistSession: false }});
+
 
 //console.log('Supabase Instance : ', supabase)
 
@@ -157,23 +39,132 @@ async function tempasync() {
 
 
 </script>
+<script>
+    function onloading(){
+        // var announce_name = ''
+        // localStorage.setItem('announce_name','')
+    // window.curr_user = "";
+    console.log(supabase)
+}
 
+
+async function userReq(){
+    console.log('username : ',localStorage.getItem('announce_name'))
+    if(localStorage.getItem('announce_name') == null){
+        alert('Please Login')
+    }
+    else{
+        let { data, error } = await supabase
+    .from('Posts')
+    .select('posts')
+    .eq('username',localStorage.getItem('announce_name'))
+
+    if(data){
+        for(let i = 0; i < data[0].posts.length; i++){
+            console.log(data[0].posts[i].post)
+            var main = document.createElement("h1");
+        main.style.fontWeight='900';
+        main.innerText=data[0].posts[i].post
+        var matter = document.createElement("p")
+        matter.innerText = data[0].posts[i].headline
+        var contain = document.createElement("div");
+        
+        contain.style.margin='25px'
+        contain.style.padding = '15px'
+        contain.style.marginTop = '10px'
+        contain.style.cursor='pointer'
+        contain.style.width = '60em'
+        contain.style.height = '15vh'
+        contain.style.boxShadow = "3px 3px 3px 2px rgba(0,0,0,.8)"
+        
+        contain.appendChild(main)
+        contain.appendChild(matter)
+        if(i==0){
+        document.getElementById('main_posts').innerHTML = contain.outerHTML
+        }
+        else{
+            
+        document.getElementById('main_posts').innerHTML += contain.outerHTML
+        }
+        }}
+
+    }
+
+        
+}
+
+    
+
+
+
+    
+
+        
+    async function handleAllPosts(){
+        
+
+    let { data, error } = await supabase
+    .from('Posts')
+    .select('posts')
+    if(data){
+        console.log(data)
+        for(let z=0;z<data.length;z++){
+            console.log(data[z]);
+        
+        for(let i = 0; i < data[z].posts.length; i++){
+            console.log(data[z].posts[i].post)
+            var main = document.createElement("h1");
+        main.style.fontWeight='900';
+        main.innerText=data[z].posts[i].post
+        var matter = document.createElement("p")
+        matter.innerText = data[z].posts[i].headline
+        var contain = document.createElement("div");
+        
+        contain.style.margin='25px'
+        contain.style.padding = '15px'
+        contain.style.marginTop = '10px'
+        contain.style.cursor='pointer'
+        contain.style.width = '60em'
+        contain.style.height = '15vh'
+        contain.style.boxShadow = "3px 3px 3px 2px rgba(0,0,0,.8)"
+        
+        contain.appendChild(main)
+        contain.appendChild(matter)
+        if(i==0 && z==0){
+        document.getElementById('main_posts').innerHTML = contain.outerHTML
+        }
+        else{
+            
+        document.getElementById('main_posts').innerHTML += contain.outerHTML
+        }
+        }}
+
+    }
+
+        
+}
+    
+            
+    
+    
+        </script>
+        
 
     
           
 </head>
-<body>
+<body onload="onloading();">
     <div class="h-[12vh] w-full bg-blue-500 text-white">
         <a href="aboutUs.html" class="px-5 pt-6 float-right">About Us</a>
         <a href="contact.html" class="px-5 pt-6 float-right">Contact</a>
         <a href="login.html" class="px-5 pt-6 float-right">Login</a>
     </div>
     <div class=" w-1/6 bg-pink-300 h-[88vh] float-left gap-5 justify-center">
-        <button onclick="handlePosts();" class="bg-pink-400 pt-1 w-full mt-32 h-10 rounded-s-md hover: cursor-pointer hover:bg-pink-700">
-            <a onclick="handlePosts();" class="text-bold px-10 py-15 mt-15 text-xl">All Posts</a>
+        <button onclick="handleAllPosts();" class="bg-pink-400 pt-1 w-full mt-32 h-10 rounded-s-md hover: cursor-pointer hover:bg-pink-700">
+            <a onclick="handleAllPosts();" class="text-bold px-10 py-15 mt-15 text-xl">All Posts</a>
         </button>
-        <button onclick="fetchRows();"  class="bg-pink-400 pt-1 w-full mt-8 hover:bg-pink-700 rounded-s-md h-10 hover: cursor-pointer">
-            <a onclick="fetchRows();" class="text-bold px-10 py-15 mt-15 text-xl ">User Posts</a>
+        <button onclick="userReq();"  class="bg-pink-400 pt-1 w-full mt-8 hover:bg-pink-700 rounded-s-md h-10 hover: cursor-pointer">
+            <a onclick="userReq();" class="text-bold px-10 py-15 mt-15 text-xl ">User Posts</a>
         </button>
         <button onclick="addPost()" class="bg-pink-400 pt-1 w-full mt-8 hover:bg-pink-700 rounded-s-md h-10 hover: cursor-pointer">
             <a class="text-bold px-10 py-15 mt-15 text-xl ">Share With Us</a>

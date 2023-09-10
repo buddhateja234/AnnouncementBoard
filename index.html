@@ -47,6 +47,29 @@ async function tempasync() {
     console.log(supabase)
 }
 
+async function addPost(){
+    var username = localStorage.getItem('announce_name');
+    var { data, error } = await supabase
+  .from('Posts')
+  .select()
+  .eq('username',username)
+    const posting = prompt('Please Enter the Post name : ')
+    const heading = prompt('Please ENter the Post details : ')
+    //console.log(data[0])
+    var temp = [{"post":posting,"headline":heading}]
+    const email = data[0]['e-mail']
+    //console.log(data[0]['username'])
+    temp = data[0]['posts'].concat(temp)
+    //console.log(temp)
+    const { data1, error1 } = await supabase
+ .from('Posts')
+ .update({'e-mail':email,'username':username,'posts':temp})
+ .eq('username',username)
+
+
+
+}
+
 
 async function userReq(){
     console.log('username : ',localStorage.getItem('announce_name'))

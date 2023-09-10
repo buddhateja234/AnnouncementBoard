@@ -41,6 +41,9 @@ async function tempasync() {
 </script>
 <script>
     function onloading(){
+        if(localStorage.getItem('announce_name')!=null){
+            document.getElementById('index_login').innerText=localStorage.getItem('announce_name') 
+        }
         // var announce_name = ''
         // localStorage.setItem('announce_name','')
     // window.curr_user = "";
@@ -175,6 +178,9 @@ async function userReq(){
     
     
         </script>
+        <script>
+            var current_using = localStorage.getItem('announce_name');
+        </script>
         
 
     
@@ -184,7 +190,7 @@ async function userReq(){
     <div class="h-[12vh] w-full bg-blue-500 text-white">
         <a href="aboutUs.html" class="px-5 pt-6 float-right">About Us</a>
         <a href="contact.html" class="px-5 pt-6 float-right">Contact</a>
-        <a href="login.html" class="px-5 pt-6 float-right">Login</a>
+        <a href="login.html" id="index_login" class="px-5 pt-6 float-right">Login</a>
     </div>
     <div class=" w-1/6 bg-pink-300 h-[88vh] float-left gap-5 justify-center">
         <button onclick="handleAllPosts();" class="bg-pink-400 pt-1 w-full mt-32 h-10 rounded-s-md hover: cursor-pointer hover:bg-pink-700">
